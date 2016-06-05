@@ -1,0 +1,107 @@
+{% load staticfiles %}
+{% load i18n mptt_tags %}
+{% load mathjax %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ru">
+
+<head>
+    <title>Qvazar</title>
+<!-- <link rel="stylesheet" type="text/css" href="{% static "static/css/foundation.css" %}"> -->
+{% mathjax_scripts %}
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="{% static "static/css/style.css" %}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{% static "static/css/gallery.theme.css" %}">
+<link rel="stylesheet" href="{% static "static/css/gallery.min.css" %}">
+<meta name="description" content="компьютерное моделирование" />
+<meta name="keywords" content="maple, blender,geogebra,python" />
+<!--
+<script type="text/javascript" async
+  src="home/mrt/firstapp/static/js/MathJax-2.6-latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script type="text/javascript" async
+  src="{" static "static/js/MathJax-2.6-latest/MathJax.js" %}"?config=TeX-MML-AM_CHTML">
+</script>
+-->
+
+<link href="{% static "static/highlighter/shThemeDefault.css" %}" rel="stylesheet" type="text/css" />
+    <script src="{% static "static/highlighter/shCore.js" %}" type="text/javascript"></script>
+    <script src="{% static "static/highlighter/shBrushPython.js" %}" type="text/javascript"></script>
+    <script src="{% static "static/highlighter/shBrushCss.js" %}" type="text/javascript"></script>
+    <script src="{% static "static/highlighter/shBrushJScript.js" %}" type="text/javascript"></script>
+    <link href="{% static "static/highlighter/shCore.css" %}" rel="stylesheet" type="text/css" />
+</head>
+
+
+<body>
+
+
+<div class="main">
+     <div class="header">
+	     <div id="button"> #
+	     <div id="s_panel">
+	     <ul  class="drop_vert_menu">
+	     <li><a href="/" class="active"><span>Главная</span></a></li>
+	     <li><a href="/stati/"><span>Статьи</span></a></li>
+	     <li>{% if username %}
+                <a href="/auth/logout/"><span>Выйти</span></a>
+            {% else %}
+                <a href="/auth/login/"><span>Войти</span></a>
+            {% endif %}</li>
+	     </div>
+         </div> 
+     
+	 <div class="header_resize">
+         <div class="logo">
+         <h1 class="title"><a href="/"><span>QVAZAR</span> <small>КОМПЬЮТЕРНОЕ МОДЕЛИРОВАНИЕ </small></a></h1>
+         </div>
+
+
+{% block hd %}{% endblock %}
+{% block slide %}{% endblock %}
+
+
+
+
+
+
+<!-- <div class="row"> -->
+{% block article %}{% endblock %}
+{% block login %}{% endblock %}
+{% block stati %}{% endblock %}
+<!-- </div> -->
+
+		     </div>
+                     </div>
+
+
+ 	
+
+ 	{% block rubric %}{% endblock %}
+</div>
+</div>
+
+	
+
+<!-- "{% static "static/css/foundation.css" %}"> -->
+
+ 		 {% block abso %}{% endblock %}
+
+<div class="footer">
+             <div class="footer_resize">
+             <p class="lf">2016 Сайт "QVAZAR"</p>
+             <p class="rf">г.Казань-Создание и продвижение сайта </p>
+             </div>
+             </div>
+     </div>
+	
+
+	<script type="text/javascript">
+        SyntaxHighlighter.all()
+    </script>
+
+</body>
+</html>
+
+
+

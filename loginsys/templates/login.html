@@ -1,0 +1,48 @@
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load i18n mptt_tags %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ru">
+
+<head>
+<title>Qvazar</title>
+
+<link href="{% static "static/css/foundation.css" %}" rel="stylesheet" type="text/css" />
+
+
+</head>
+
+
+<body>
+<h1><a href="/">QVAZAR</a></h1>
+
+ <div class="body1">
+             <div class="body1_resize">
+           
+
+		     <div class="left">
+                     <div class="resize_bg">	
+
+    <div class="large-offset-3 large-6 columns">
+        <form action="/auth/login/" method="post">
+            {% csrf_token %}
+            <label for="username">Имя пользователя</label>
+            <input type="text" name="username" id="username"><br>
+            <label for="password">Пароль</label><span style='padding-left:95px;'> </span>
+            <input type="password" name="password" id="password">
+            {% if login_error %}
+                <label class="error">{{ login_error }}</label>
+            {% endif %}
+            <input class="button" type="submit" value="Войти">
+        <div class="button"><a href="/auth/register/"><font color="white">Регистрация</font></a></div>
+        </form>
+    </div>
+
+</div>
+</div>
+</div>
+</div>
+
+</body>
+

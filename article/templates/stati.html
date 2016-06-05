@@ -1,0 +1,77 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load i18n mptt_tags %}
+
+{% block stati %}
+
+
+
+<div class="body1">
+    <div class="body1_resize">
+      <div class="left1">
+        <div class="resize_bg1">
+
+
+<div class="menu1">
+             <ul>
+             <li><a href="/">Главная</a></li>
+             <li><a href="/stati/" class="active"><span>Статьи</span></a></li>
+	    <li>{% if username %}
+                <a href="/auth/logout/"><span>Выйти ({{ username }})</span></a>
+            {% else %}
+                <a href="/auth/login/"><span>Войти</span></a>
+            {% endif %}</li>
+</div>
+      <div class="clr"></div>
+    </div>
+
+	
+
+<div class="body1">
+    <div class="body1_resize">
+      <div class="left1">
+        <div class="resize_bg1">
+
+
+<div class="large-8 columns">
+{% for article in articles %}
+<p>Дата публикации: {{ article.article_date }}</p>
+<h4><a href="/articles/get/{{ article.id }}/">{% autoescape off %}{{ article.article_title }}{% endautoescape %}</a></h4>
+	<p>{% autoescape off %}{{ article.article_anot }}{% endautoescape %}</p>
+	<p ><a href="/articles/addlike/{{ article.id }}/"><img src="{% static "images.jpg" %}" width="25px" height="25px"></a> 
+
+{{ article.article_likes }}</p>
+	<hr>
+{% endfor %}
+</div>
+<p>&nbsp;</p>
+
+<div class="row">
+        <div class="large-3 large-offset-5 columns">
+            <ul class="pagination">
+                {% if articles.has_previous %}
+                    <li class="arrow"><a href="/page/{{ articles.previous_page_number }}/">&laquo;</a></li>
+                {% else %}
+                    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+                {% endif %}
+                {% for page in articles.paginator.page_range %}
+                    {% if page == articles.number %}
+                        <li class="current"><a href="/page/{{ page }}/">{{ page }}</a></li>
+                    {% else %}
+                        <li><a href="/page/{{ page }}/">{{ page }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if articles.has_next %}
+                    <li class="arrow"><a href="/page/{{ articles.next_page_number }}/">&raquo;</a></li>
+                {% else %}
+                    <li class="arrow unavailable"><a href="">&raquo;</a></li>
+                {% endif %}
+            </ul>
+        </div>
+<div class="clr"></div>
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,157 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% load i18n mptt_tags %}
+
+
+{% block article %}
+
+  <div class="body">
+             <div class="body_resize">
+		     <div class="left">
+                     <div class="resize_bg">	
+<div class="large-8 columns">
+{% for article in articles %}
+<p>Дата публикации: {{ article.article_date }}</p>
+<h4><a href="/articles/get/{{ article.id }}/">{% autoescape off %}{{ article.article_title }}{% endautoescape %}</a></h4>
+	<p>{% autoescape off %}{{ article.article_anot }}{% endautoescape %}</p>
+	<p ><a href="/articles/addlike/{{ article.id }}/"><img src="{% static "images.jpg" %}" width="25px" height="25px"></a> 
+
+{{ article.article_likes }}</p>
+	<hr>
+{% endfor %}
+</div>
+<p>&nbsp;</p>
+
+<div class="row">
+        <div class="large-3 large-offset-5 columns">
+            <ul class="pagination">
+                {% if articles.has_previous %}
+                    <li class="arrow"><a href="/page/{{ articles.previous_page_number }}/">&laquo;</a></li>
+                {% else %}
+                    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+                {% endif %}
+                {% for page in articles.paginator.page_range %}
+                    {% if page == articles.number %}
+                        <li class="current"><a href="/page/{{ page }}/">{{ page }}</a></li>
+                    {% else %}
+                        <li><a href="/page/{{ page }}/">{{ page }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if articles.has_next %}
+                    <li class="arrow"><a href="/page/{{ articles.next_page_number }}/">&raquo;</a></li>
+                {% else %}
+                    <li class="arrow unavailable"><a href="">&raquo;</a></li>
+                {% endif %}
+            </ul>
+        </div>
+<div class="clr"></div>
+    </div>
+
+{% endblock %}
+
+{% block slide %}
+<div class="headert_text_resize">
+         <section class="slider">
+             <div class="carousel">
+             <div class="slide fig1"><h2>BLENDER</h2></div>
+             <div class="slide fig2"><h2>PYTHON</h2></div>
+             <div class="slide fig3"><h2>MAPLE</h2></div>
+             <div class="slide fig4"><h2>AND AMAZING GEOGEBRA</h2></div>
+             </div>
+         </section>
+         </div>
+{% endblock %}
+
+
+
+
+
+
+{% block hd %}
+
+ 
+	     <div class="menu">
+             <ul>
+             <li><a href="/" class="active">Главная</a></li>
+             <li><a href="/stati/"><span>Статьи</span></a></li>
+	    <li>{% if username %}
+                <a href="/auth/logout/"><span>Выйти</span></a>
+            {% else %}
+                <a href="/auth/login/"><span>Войти</span></a>
+            {% endif %}</li>
+
+             </div>
+             <div class="clr"></div>
+</div>
+        
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+{% block rubric %}
+<div class="right">
+        <div class="resize_bg">
+                 <h2>Рубрики</h2>
+<ul class="rubric">
+  {% recursetree projects %}
+  <li>
+    <a  href="/category/get/{{ node.id }}/" title="{% blocktrans with project=node %}Show all entries in {{ project }}{% endblocktrans %}">{{ node }}</a>
+    {% if not node.is_leaf_node %}
+    <ul class="project-children project-{{ node.slug }}">
+      {{ children }}
+    </ul>
+    {% endif %}
+  </li>
+  {% endrecursetree %}
+  {% if not projects %}
+  <li>
+    {% trans "No projects yet." %}
+  </li>
+  {% endif %}
+
+</ul>
+
+
+      </div>
+      </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+{% block abso %}
+<div class="FBG">
+                 <div class="FBG_resize">
+                 
+      
+	  
+	             <div class="blok">
+                 <h2>О чем <span> Сайт </span></h2>
+                 
+                 <p> Компьютерная модель, или численная модель  — компьютерная программа, работающая на отдельном компьютере, суперкомпьютере или множестве взаимодействующих компьютеров (вычислительных узлов), реализующая представление объекта, системы или понятия в форме, отличной от реальной<a href="#">Подробнее...</a><br /> </p>
+                 </div>
+      
+	             <div class="blok">
+                 <h2>Контакты</h2>
+                 <p>Создателями этого сайта являюется группа студентов Казанского Федерального Университета совместно со старшим преподавателем КФУ  Института математики и механики им.Н.И.Лобачевского кафедры математики и математического моделирования А.А.Агафоновым.
+                 E-mail: <a href="#">mail.ru</a><br />
+                 Telephone : +1 (123) 444-5677<br />
+                 +1 (123) 444-5677<br />
+                 +1 (123) 444-5677</p>
+                 </div>
+         </div>
+    
+         <div class="clr"></div>
+	     </div>
+{% endblock %}

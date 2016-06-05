@@ -1,0 +1,75 @@
+{% extends 'main.html' %}
+
+{% block article %}
+{% load mptt_tags %}
+{% load i18n mptt_tags %}
+
+
+ <div class="body1">
+    <div class="body1_resize">
+      <div class="left1">
+        <div class="resize_bg1">
+<div class="menu1">
+             <ul>
+             <li><a href="/">Главная</a></li>
+             <li><a href="/stati/" class="active"><span>Статьи</span></a></li>
+	    <li>{% if username %}
+                <a href="/auth/logout/"><span>Выйти ({{ username }})</span></a>
+            {% else %}
+                <a href="/auth/login/"><span>Войти</span></a>
+            {% endif %}</li>
+</div>
+      <div class="clr"></div>
+    </div>
+
+
+
+<div class="body1">
+    <div class="body1_resize">
+      <div class="left1">
+        <div class="resize_bg1">
+
+<ul class="right">Из категории: <a href="/category/get/{{ article.category.id }}/"> {{ article.category }}</a></h4></ul>
+
+
+<p>{{ article.article_date }}</p>
+<h2>{% autoescape off %}{{ article.article_title }}{% endautoescape %}</h2>
+<h5>Аннотация</h5>
+<p>{% autoescape off %}{{ article.article_anot }}{% endautoescape %}</p>
+<hr>
+
+<p>{% autoescape off %}{{ article.article_text }}{% endautoescape %}</p>
+
+<hr>
+
+<p>Комментарии</p>
+{% for comment in comments %}
+	<p>{{ comment.comments_text}}</p>
+{% endfor %}
+
+{% if username %}
+<form action="/articles/addcomment/{{ article.id }}/" method="post"><br>
+{% csrf_token %}<br>
+    {{ form }}<br>
+    <input type="submit" class="button" value="Добавить комментарий"><br
+    </form>
+{% endif%}
+
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+
+             <div class="footer">
+             <div class="footer_resize">
+             <p class="lf">2016 Сайт "QVAZAR"</p>
+             <p class="rf">г.Казань-Создание и продвижение сайта </p>
+             </div>
+             </div>
+     </div>
+{% endblock %}
+

@@ -1,0 +1,30 @@
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load i18n mptt_tags %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ru">
+
+<head>
+<title>Qvazar</title>
+
+<link href="{% static "static/css/foundation.css" %}" rel="stylesheet" type="text/css" />
+
+
+</head>
+
+
+<body>
+<h1><a href="/">QVAZAR</a></h1>
+
+<div class="row">
+       <div class="large-offset-3 large-6 columns">
+        <form action="/auth/register/" method="post">
+            {% csrf_token %}
+            {{ form }}
+
+            <input class="button" type="submit" value="Зарегистрироваться">
+        </form>
+    </div>
+</div>
+</body>
+
